@@ -1,40 +1,42 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * =============================================================================
  * PROJECT: Train Consist Management App
- * USE CASE 2: Add Passenger Bogies to Train (ArrayList Operations)
+ * USE CASE 3: Track Unique Bogie IDs (Set – HashSet)
  * =============================================================================
  */
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
+        System.out.println("Scenario: Enforcing Unique Bogie IDs\n");
 
-        // 1. Create: Initialize the ArrayList for Passenger Bogies
-        List<String> passengerBogies = new ArrayList<>();
+        // 1. Initialize a HashSet to store unique Bogie IDs
+        // We use the Set interface for abstraction.
+        Set<String> uniqueBogieIds = new HashSet<>();
 
-        // 2. Add: Attaching bogies to the train
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // 2. Add Bogie IDs to the set
+        uniqueBogieIds.add("BG101");
+        uniqueBogieIds.add("BG102");
+        uniqueBogieIds.add("BG103");
 
-        // 3. Read: Display the current consist
-        System.out.println("Passenger bogies added: " + passengerBogies);
-        System.out.println("Total bogie count: " + passengerBogies.size());
+        // 3. Intentional Duplicate Addition
+        // Attempting to add a duplicate ID to simulate a system error or double-entry
+        System.out.println("Attempting to add duplicate ID: BG101...");
+        boolean isAdded = uniqueBogieIds.add("BG101");
 
-        // 4. Delete: Removing a bogie (e.g., for maintenance or route change)
-        String removedBogie = "AC Chair";
-        passengerBogies.remove(removedBogie);
-        System.out.println("\nAction: " + removedBogie + " has been detached.");
+        // 4. Check if the duplicate was accepted
+        if (!isAdded) {
+            System.out.println("Result: Duplicate rejected by HashSet logic.");
+        }
 
-        // 5. Search: Checking for existence using contains()
-        boolean hasSleeper = passengerBogies.contains("Sleeper");
-        System.out.println("Checking existence: Is 'Sleeper' attached? " + hasSleeper);
+        // 5. Display the final set of Unique IDs
+        System.out.println("\nRegistered Unique Bogie IDs:");
+        System.out.println(uniqueBogieIds);
 
-        // 6. Final State: Display final list
-        System.out.println("\nFinal Train Consist: " + passengerBogies);
-        System.out.println("Final bogie count: " + passengerBogies.size());
+        // 6. Summary
+        System.out.println("Total Unique Bogies: " + uniqueBogieIds.size());
     }
 }
